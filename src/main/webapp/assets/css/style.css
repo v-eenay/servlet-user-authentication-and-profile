@@ -65,6 +65,14 @@ h1 {
     line-height: 1.5;
 }
 
+/* Dashboard Actions */
+.dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+
 /* Alert Messages */
 .alert {
     padding: var(--spacing-sm);
@@ -278,6 +286,10 @@ h1 {
     .container {
         max-width: 100%;
         padding: var(--spacing-lg);
+    }
+    
+    .dashboard-actions {
+        flex-direction: column;
     }
 }
 

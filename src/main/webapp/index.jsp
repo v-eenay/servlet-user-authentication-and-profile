@@ -17,12 +17,12 @@
     }
 %>
 
-<!DOCTYPE html>a
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile System</title>
+    <title>Welcome | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -32,11 +32,24 @@
 <body>
 
 <div class="container">
-    <h1>User Profile System</h1>
-    <p class="welcome-message">Welcome to the User Profile System. Please choose an option below to continue.</p>
+    <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
+    <div class="profile-image">
+        <img src="data:image/jpeg;base64,<%= java.util.Base64.getEncoder().encodeToString(user.getProfilePicture()) %>" alt="Profile Picture" class="profile-pic">
+    </div>
+    <% } else { %>
+    <div class="avatar">
+        <%= firstLetter %>
+    </div>
+    <% } %>
     
-    <a href="${pageContext.request.contextPath}/LoginServlet" class="btn btn-primary">Login</a>
-    <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary">Register</a>
+    <h1>Welcome, <%= user.getFullName() %></h1>
+    <p class="welcome-message">It's a pleasure to have you with us today. Your distinguished presence enhances our community. We invite you to explore your personalized dashboard and manage your esteemed profile.</p>
+    
+    <div class="dashboard-actions">
+        <a href="${pageContext.request.contextPath}/UserProfileServlet" class="btn btn-primary">View Profile</a>
+        <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Update Profile</a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-danger">Logout</a>
+    </div>
 </div>
 
 </body>
