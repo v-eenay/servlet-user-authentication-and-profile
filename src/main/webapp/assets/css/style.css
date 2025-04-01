@@ -17,6 +17,8 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
     --font-serif: 'Playfair Display', Georgia, serif;
+    --error-color: #d85050;
+    --success-color: #50b082;
 }
 
 * {
@@ -61,6 +63,27 @@ h1 {
     color: var(--light-text);
     font-size: 1rem;
     line-height: 1.5;
+}
+
+/* Alert Messages */
+.alert {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    border-radius: 0;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.alert-success {
+    background-color: rgba(80, 176, 130, 0.1);
+    border-left: 3px solid var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-error {
+    background-color: rgba(216, 80, 80, 0.1);
+    border-left: 3px solid var(--error-color);
+    color: var(--error-color);
 }
 
 .btn {

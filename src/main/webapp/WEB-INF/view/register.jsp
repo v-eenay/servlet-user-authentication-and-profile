@@ -24,6 +24,13 @@
     <h1>Create Account</h1>
     <p class="welcome-message">Please fill in your details to register</p>
     
+    <!-- Display error message if present -->
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="alert alert-error">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    
     <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" class="form" enctype="multipart/form-data">
         <!-- Account Information Section -->
         <div class="form-section">

@@ -24,6 +24,20 @@
     <h1>Welcome Back</h1>
     <p class="welcome-message">Please enter your credentials to login</p>
     
+    <!-- Display success message if present -->
+    <% if (request.getAttribute("message") != null) { %>
+    <div class="alert alert-success">
+        <%= request.getAttribute("message") %>
+    </div>
+    <% } %>
+    
+    <!-- Display error message if present -->
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="alert alert-error">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    
     <form action="${pageContext.request.contextPath}/LoginServlet" method="post" class="form">
         <div class="form-group">
             <label for="username">Username</label>
