@@ -15,18 +15,18 @@
         response.sendRedirect(request.getContextPath() + "/LoginServlet");
         return;
     }
-
-    // Format date of birth if available
-    String dob = "";
-    if (user.getDateOfBirth() != null) {
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM d, yyyy");
-        dob = sdf.format(user.getDateOfBirth());
-    }
     
     // Get the first letter of the user's name for the avatar
     String firstLetter = "";
     if (user.getFullName() != null && !user.getFullName().isEmpty()) {
         firstLetter = user.getFullName().substring(0, 1).toUpperCase();
+    }
+    
+    // Check for success message
+    String message = (String) session.getAttribute("message");
+    if (message != null) {
+        // Remove message from session after retrieving it
+        session.removeAttribute("message");
     }
 %>
 <!DOCTYPE html>
@@ -34,19 +34,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user.getFullName() %> | Profile</title>
+    <title>User Profile | <%= user.getFullName() %></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        <%@ include file="/assets/css/style.css" %>
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 <body>
 
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/" class="subtle-link">&larr; Back to Dashboard</a>
+            <a href="${pageContext.request.contextPath}/DashboardServlet" class="subtle-link">&larr; Back to Dashboard</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
@@ -61,53 +59,66 @@
         
         <h1 class="profile-name"><%= user.getFullName() %></h1>
         <p class="profile-username">@<%= user.getUsername() %></p>
+        
+        <% if (message != null) { %>
+        <div class="alert alert-success">
+            <%= message %>
+        </div>
+        <% } %>
     </div>
     
-    <div class="profile-sections">
+    <div class="profile-content">
         <div class="profile-section">
             <h2 class="section-title">Account Information</h2>
-            <div class="profile-detail">
-                <div class="detail-label">Email</div>
-                <div class="detail-value"><%= user.getEmail() != null ? user.getEmail() : "Not provided" %></div>
-            </div>
-            <div class="profile-detail">
-                <div class="detail-label">Username</div>
-                <div class="detail-value"><%= user.getUsername() %></div>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <div class="item-label">Username</div>
+                    <div class="item-value"><%= user.getUsername() %></div>
+                </div>
+                <div class="profile-item">
+                    <div class="item-label">Email</div>
+                    <div class="item-value"><%= user.getEmail() %></div>
+                </div>
             </div>
         </div>
         
         <div class="profile-section">
             <h2 class="section-title">Personal Information</h2>
-            <div class="profile-detail">
-                <div class="detail-label">Full Name</div>
-                <div class="detail-value"><%= user.getFullName() != null ? user.getFullName() : "Not provided" %></div>
-            </div>
-            <div class="profile-detail">
-                <div class="detail-label">Date of Birth</div>
-                <div class="detail-value"><%= dob.isEmpty() ? "Not provided" : dob %></div>
-            </div>
-            <div class="profile-detail">
-                <div class="detail-label">Gender</div>
-                <div class="detail-value"><%= user.getGender() != null ? user.getGender() : "Not provided" %></div>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <div class="item-label">Full Name</div>
+                    <div class="item-value"><%= user.getFullName() != null ? user.getFullName() : "Not provided" %></div>
+                </div>
+                <div class="profile-item">
+                    <div class="item-label">Date of Birth</div>
+                    <div class="item-value"><%= user.getDateOfBirth() != null ? user.getDateOfBirth() : "Not provided" %></div>
+                </div>
+                <div class="profile-item">
+                    <div class="item-label">Gender</div>
+                    <div class="item-value"><%= user.getGender() != null ? user.getGender() : "Not provided" %></div>
+                </div>
             </div>
         </div>
         
         <div class="profile-section">
             <h2 class="section-title">Contact Information</h2>
-            <div class="profile-detail">
-                <div class="detail-label">Phone Number</div>
-                <div class="detail-value"><%= user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided" %></div>
-            </div>
-            <div class="profile-detail">
-                <div class="detail-label">Address</div>
-                <div class="detail-value"><%= user.getAddress() != null && !user.getAddress().isEmpty() ? user.getAddress() : "Not provided" %></div>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <div class="item-label">Phone</div>
+                    <div class="item-value"><%= user.getPhone() != null ? user.getPhone() : "Not provided" %></div>
+                </div>
+                <div class="profile-item">
+                    <div class="item-label">Address</div>
+                    <div class="item-value"><%= user.getAddress() != null ? user.getAddress() : "Not provided" %></div>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="profile-actions">
         <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Edit Profile</a>
-        <a href="${pageContext.request.contextPath}/" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="${pageContext.request.contextPath}/ResetPasswordServlet" class="btn btn-secondary">Reset Password</a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline">Logout</a>
     </div>
 </div>
 

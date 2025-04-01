@@ -1,8 +1,9 @@
 package controller;
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.User;
+
 import java.io.IOException;
 
 @WebServlet(name = "UserProfileServlet", value = "/UserProfileServlet")
@@ -18,16 +19,12 @@ public class UserProfileServlet extends HttpServlet {
             return;
         }
         
-        // Get user from session
-        User user = (User) session.getAttribute("user");
-        
         // Forward to user profile page
         request.getRequestDispatcher("/WEB-INF/view/userprofile.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Handle any POST requests by redirecting to doGet
         doGet(request, response);
     }
 }

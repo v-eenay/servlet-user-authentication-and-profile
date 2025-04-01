@@ -124,6 +124,40 @@ public class UserDAO {
         }
         return false; // Return false if update fails
     }
+    
+    // Method to update user password
+    public static boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        // First verify the current password
+        String verifyQuery = "SELECT password FROM users WHERE id = ?";
+        String updateQuery = "UPDATE users SET password = ? WHERE id = ?";
+        
+        try (Connection conn = getConnection();
+             PreparedStatement psVerify = conn.prepareStatement(verifyQuery);
+             PreparedStatement psUpdate = conn.prepareStatement(updateQuery)) {
+            
+            // Verify current password
+            psVerify.setInt(1, userId);
+            ResultSet rs = psVerify.executeQuery();
+            
+            if (rs.next()) {
+                String storedPassword = rs.getString("password");
+                
+                // If current password matches, update to new password
+                if (storedPassword.equals(currentPassword)) {
+                    psUpdate.setString(1, newPassword); // Should hash the password in a real application
+                    psUpdate.setInt(2, userId);
+                    
+                    int affectedRows = psUpdate.executeUpdate();
+                    return affectedRows > 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return false; // Return false if password update fails
+    }
+    
     // Method to delete user by username/email and password
     public static boolean deleteUser(String emailOrUsername, String password) {
         String queryCheck = "SELECT id, password FROM users WHERE (email = ? OR username = ?)";
