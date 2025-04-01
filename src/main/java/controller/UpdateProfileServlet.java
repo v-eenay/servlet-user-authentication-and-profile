@@ -17,6 +17,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 @WebServlet(name = "UpdateProfileServlet", value = "/UpdateProfileServlet")
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024, // 1 MB
+    maxFileSize = 1024 * 1024 * 5,   // 5 MB
+    maxRequestSize = 1024 * 1024 * 10 // 10 MB
+)
 public class UpdateProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
