@@ -22,6 +22,13 @@
         firstLetter = user.getFullName().substring(0, 1).toUpperCase();
     }
     
+    // Format date of birth if available
+    String dob = "";
+    if (user.getDateOfBirth() != null) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM d, yyyy");
+        dob = sdf.format(user.getDateOfBirth());
+    }
+    
     // Check for success message
     String message = (String) session.getAttribute("message");
     if (message != null) {
@@ -38,13 +45,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <style>
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .profile-item {
+            padding: var(--spacing-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--background);
+        }
+        
+        .item-label {
+            font-weight: 500;
+            color: var(--light-text);
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+        
+        .item-value {
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/DashboardServlet" class="subtle-link">&larr; Back to Dashboard</a>
+            <a href="${pageContext.request.contextPath}/" class="subtle-link">&larr; Back to Home</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
@@ -67,7 +105,7 @@
         <% } %>
     </div>
     
-    <div class="profile-content">
+    <div class="profile-sections">
         <div class="profile-section">
             <h2 class="section-title">Account Information</h2>
             <div class="profile-grid">
@@ -91,7 +129,7 @@
                 </div>
                 <div class="profile-item">
                     <div class="item-label">Date of Birth</div>
-                    <div class="item-value"><%= user.getDateOfBirth() != null ? user.getDateOfBirth() : "Not provided" %></div>
+                    <div class="item-value"><%= dob.isEmpty() ? "Not provided" : dob %></div>
                 </div>
                 <div class="profile-item">
                     <div class="item-label">Gender</div>
@@ -105,11 +143,11 @@
             <div class="profile-grid">
                 <div class="profile-item">
                     <div class="item-label">Phone</div>
-                    <div class="item-value"><%= user.getPhone() != null ? user.getPhone() : "Not provided" %></div>
+                    <div class="item-value"><%= user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided" %></div>
                 </div>
                 <div class="profile-item">
                     <div class="item-label">Address</div>
-                    <div class="item-value"><%= user.getAddress() != null ? user.getAddress() : "Not provided" %></div>
+                    <div class="item-value"><%= user.getAddress() != null && !user.getAddress().isEmpty() ? user.getAddress() : "Not provided" %></div>
                 </div>
             </div>
         </div>

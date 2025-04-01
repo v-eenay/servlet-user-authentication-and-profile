@@ -24,6 +24,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <style>
+        .password-guidelines {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background-color: var(--background);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .password-guidelines h3 {
+            font-family: var(--font-serif);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+        
+        .password-guidelines ul {
+            padding-left: var(--spacing-md);
+        }
+        
+        .password-guidelines li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
