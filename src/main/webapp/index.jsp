@@ -17,26 +17,26 @@
     }
 %>
 
-<!DOCTYPE html>
+<!DOCTYPE html>a
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome | User Profile System</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        <%@ include file="/assets/css/style.css" %>
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="avatar">
-        <%= firstLetter %>
-    </div>
-    <h1>Welcome, <%= user.getFullName() %>!</h1>
-    <p class="welcome-message">You've successfully logged into your account.</p>
+    <h1>User Profile System</h1>
+    <p class="welcome-message">Welcome to the User Profile System. Please choose an option below to continue.</p>
     
-    <a href="UserProfileServlet" class="btn btn-primary">View Your Profile</a>
-    <a href="LogoutServlet" class="btn btn-danger">Logout</a>
+    <a href="${pageContext.request.contextPath}/LoginServlet" class="btn btn-primary">Login</a>
+    <a href="${pageContext.request.contextPath}/RegisterServlet" class="btn btn-primary">Register</a>
 </div>
 
 </body>
