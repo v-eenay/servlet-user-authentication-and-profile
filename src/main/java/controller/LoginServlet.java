@@ -19,6 +19,12 @@ public class LoginServlet extends HttpServlet {
             request.getSession().removeAttribute("registrationSuccess");
         }
         
+        // Check if there's a message parameter (for account deletion success)
+        String message = request.getParameter("message");
+        if (message != null && !message.isEmpty()) {
+            request.setAttribute("message", message);
+        }
+        
         // Redirect to the login.jsp page in WEB-INF/view directory
         request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
     }
