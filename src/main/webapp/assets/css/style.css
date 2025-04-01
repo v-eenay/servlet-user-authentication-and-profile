@@ -212,6 +212,19 @@ h1 {
     background-color: white;
 }
 
+.form-group input:disabled {
+    background-color: var(--background);
+    color: var(--light-text);
+    cursor: not-allowed;
+}
+
+.form-help {
+    margin-top: var(--spacing-xs);
+    font-size: 0.8rem;
+    color: var(--light-text);
+    font-style: italic;
+}
+
 /* Remove all custom date styling */
 /* Let the browser handle it natively */
 
@@ -254,6 +267,17 @@ h1 {
     letter-spacing: 0.5px;
     padding-bottom: var(--spacing-xs);
     border-bottom: 1px solid var(--border-color);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.form-actions .btn {
+    margin: 0;
 }
 
 /* File input styling */
@@ -395,6 +419,35 @@ h1 {
     margin: 0;
 }
 
+/* Edit Profile Form Styles */
+.edit-profile-form {
+    margin-top: var(--spacing-lg);
+}
+
+.edit-profile-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.edit-profile-form .form-group label {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    font-weight: 500;
+}
+
+.edit-profile-form .form-group input,
+.edit-profile-form .form-group select {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: white;
+}
+
+.edit-profile-form .form-actions {
+    margin-top: var(--spacing-md);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -415,6 +468,10 @@ h1 {
     }
     
     .profile-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions {
         flex-direction: column;
     }
 }
