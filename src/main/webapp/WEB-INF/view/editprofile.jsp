@@ -31,49 +31,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <style>
-        .file-upload {
-            margin-top: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-            padding: var(--spacing-md);
-            border: 2px dashed var(--border-color);
-            background-color: var(--background);
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .file-upload:hover {
-            border-color: var(--accent-color);
-        }
-        
-        .current-image {
-            margin-bottom: var(--spacing-sm);
-            text-align: center;
-        }
-        
-        .current-image img {
-            max-width: 150px;
-            max-height: 150px;
-            border: 1px solid var(--border-color);
-            padding: 3px;
-        }
-        
-        .image-preview {
-            display: none;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 20px auto;
-            overflow: hidden;
-            border: 2px solid var(--accent-color);
-        }
-        
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
 </head>
 <body>
 

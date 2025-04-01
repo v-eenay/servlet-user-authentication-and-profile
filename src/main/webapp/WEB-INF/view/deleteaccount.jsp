@@ -24,43 +24,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <style>
-        .delete-warning {
-            background-color: rgba(216, 80, 80, 0.1);
-            border-left: 3px solid var(--error-color);
-            padding: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .delete-warning h3 {
-            color: var(--error-color);
-            margin-bottom: var(--spacing-sm);
-            font-family: var(--font-serif);
-        }
-        
-        .delete-warning p {
-            color: var(--text-color);
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .delete-warning ul {
-            padding-left: var(--spacing-md);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .delete-warning li {
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .btn-danger {
-            background-color: var(--error-color);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c04545;
-        }
-    </style>
 </head>
 <body>
 
@@ -109,7 +72,7 @@
             
             <div class="form-group">
                 <label for="reason">Please tell us why you're leaving (optional)</label>
-                <textarea id="reason" name="reason" rows="4" style="width: 100%; padding: var(--spacing-sm); border: 1px solid var(--border-color);"></textarea>
+                <textarea id="reason" name="reason" rows="4"></textarea>
             </div>
         </div>
         

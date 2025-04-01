@@ -15,67 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <style>
-        .image-preview {
-            display: none;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 20px auto;
-            overflow: hidden;
-            border: 2px solid var(--accent-color);
-        }
-        
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .file-upload {
-            margin-top: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-            padding: var(--spacing-md);
-            border: 2px dashed var(--border-color);
-            background-color: var(--background);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .file-upload:hover {
-            border-color: var(--accent-color);
-        }
-        
-        .file-upload-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .file-upload-icon {
-            font-size: 2rem;
-            margin-bottom: var(--spacing-xs);
-            color: var(--primary-color);
-        }
-        
-        .file-upload-text {
-            color: var(--light-text);
-            margin-bottom: var(--spacing-xs);
-            font-size: 0.9rem;
-        }
-        
-        .file-upload input[type="file"] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
 

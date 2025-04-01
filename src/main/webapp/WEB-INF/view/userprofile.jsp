@@ -22,18 +22,11 @@
         firstLetter = user.getFullName().substring(0, 1).toUpperCase();
     }
     
-    // Format date of birth if available
-    String dob = "";
+    // Format date of birth
+    String dobString = "";
     if (user.getDateOfBirth() != null) {
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM d, yyyy");
-        dob = sdf.format(user.getDateOfBirth());
-    }
-    
-    // Check for success message
-    String message = (String) session.getAttribute("message");
-    if (message != null) {
-        // Remove message from session after retrieving it
-        session.removeAttribute("message");
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM dd, yyyy");
+        dobString = sdf.format(user.getDateOfBirth());
     }
 %>
 <!DOCTYPE html>
@@ -45,106 +38,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <style>
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .profile-item {
-            padding: var(--spacing-sm);
-            border: 1px solid var(--border-color);
-            background-color: var(--background);
-        }
-        
-        .item-label {
-            font-weight: 500;
-            color: var(--light-text);
-            margin-bottom: var(--spacing-xs);
-            font-size: 0.9rem;
-        }
-        
-        .item-value {
-            font-size: 1.1rem;
-        }
-        
-        .btn-danger {
-            background-color: #d85050;
-            color: white;
-            margin-top: var(--spacing-md);
-        }
-        
-        .btn-danger:hover {
-            background-color: #c04545;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-content {
-            background-color: var(--background);
-            margin: 15% auto;
-            padding: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-            width: 80%;
-            max-width: 500px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .modal-title {
-            margin-top: 0;
-            color: var(--error-color);
-            font-family: var(--font-serif);
-        }
-        
-        .modal-actions {
-            margin-top: var(--spacing-md);
-            display: flex;
-            justify-content: flex-end;
-            gap: var(--spacing-sm);
-        }
-        
-        .close {
-            color: var(--light-text);
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close:hover {
-            color: var(--text-color);
-        }
-        
-        @media (max-width: 600px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                width: 95%;
-                margin: 10% auto;
-            }
-        }
-    </style>
 </head>
 <body>
 
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/" class="subtle-link">&larr; Back to Home</a>
+            <a href="${pageContext.request.contextPath}/LoginServlet" class="subtle-link">&larr; Back to Home</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
@@ -159,78 +59,87 @@
         
         <h1 class="profile-name"><%= user.getFullName() %></h1>
         <p class="profile-username">@<%= user.getUsername() %></p>
-        
-        <% if (message != null) { %>
-        <div class="alert alert-success">
-            <%= message %>
-        </div>
-        <% } %>
     </div>
+    
+    <!-- Display success message if present -->
+    <% if (request.getAttribute("success") != null) { %>
+    <div class="alert alert-success">
+        <%= request.getAttribute("success") %>
+    </div>
+    <% } %>
+    
+    <!-- Display error message if present -->
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="alert alert-error">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
     
     <div class="profile-sections">
         <div class="profile-section">
             <h2 class="section-title">Account Information</h2>
-            <div class="profile-grid">
-                <div class="profile-item">
-                    <div class="item-label">Username</div>
-                    <div class="item-value"><%= user.getUsername() %></div>
-                </div>
-                <div class="profile-item">
-                    <div class="item-label">Email</div>
-                    <div class="item-value"><%= user.getEmail() %></div>
-                </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Username</div>
+                <div class="detail-value"><%= user.getUsername() %></div>
+            </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Email</div>
+                <div class="detail-value"><%= user.getEmail() %></div>
             </div>
         </div>
         
         <div class="profile-section">
             <h2 class="section-title">Personal Information</h2>
-            <div class="profile-grid">
-                <div class="profile-item">
-                    <div class="item-label">Full Name</div>
-                    <div class="item-value"><%= user.getFullName() != null ? user.getFullName() : "Not provided" %></div>
-                </div>
-                <div class="profile-item">
-                    <div class="item-label">Date of Birth</div>
-                    <div class="item-value"><%= dob.isEmpty() ? "Not provided" : dob %></div>
-                </div>
-                <div class="profile-item">
-                    <div class="item-label">Gender</div>
-                    <div class="item-value"><%= user.getGender() != null ? user.getGender() : "Not provided" %></div>
-                </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Full Name</div>
+                <div class="detail-value"><%= user.getFullName() != null ? user.getFullName() : "Not provided" %></div>
+            </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Date of Birth</div>
+                <div class="detail-value"><%= !dobString.isEmpty() ? dobString : "Not provided" %></div>
+            </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Gender</div>
+                <div class="detail-value"><%= user.getGender() != null && !user.getGender().isEmpty() ? user.getGender() : "Not provided" %></div>
             </div>
         </div>
         
         <div class="profile-section">
             <h2 class="section-title">Contact Information</h2>
-            <div class="profile-grid">
-                <div class="profile-item">
-                    <div class="item-label">Phone</div>
-                    <div class="item-value"><%= user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided" %></div>
-                </div>
-                <div class="profile-item">
-                    <div class="item-label">Address</div>
-                    <div class="item-value"><%= user.getAddress() != null && !user.getAddress().isEmpty() ? user.getAddress() : "Not provided" %></div>
-                </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Phone Number</div>
+                <div class="detail-value"><%= user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided" %></div>
+            </div>
+            
+            <div class="profile-detail">
+                <div class="detail-label">Address</div>
+                <div class="detail-value"><%= user.getAddress() != null && !user.getAddress().isEmpty() ? user.getAddress() : "Not provided" %></div>
             </div>
         </div>
     </div>
     
     <div class="profile-actions">
         <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Edit Profile</a>
-        <a href="${pageContext.request.contextPath}/ResetPasswordServlet" class="btn btn-secondary">Reset Password</a>
+        <a href="${pageContext.request.contextPath}/ResetPasswordServlet" class="btn btn-secondary">Change Password</a>
         <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline">Logout</a>
         <button id="deleteAccountBtn" class="btn btn-danger">Delete Account</button>
     </div>
 </div>
 
-<!-- Delete Account Password Confirmation Modal -->
-<div id="deleteModal" class="modal">
+<!-- Delete Account Modal -->
+<div id="deleteAccountModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h3 class="modal-title">Confirm Account Deletion</h3>
-        <p>Please enter your password to proceed to the account deletion page:</p>
+        <h2 class="modal-title">Verify Password</h2>
+        <p>Please enter your password to proceed to account deletion.</p>
         
-        <form id="passwordForm" action="${pageContext.request.contextPath}/DeleteAccountServlet" method="get">
+        <form action="${pageContext.request.contextPath}/DeleteAccountServlet" method="post" class="form">
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
@@ -238,7 +147,7 @@
             
             <div class="modal-actions">
                 <button type="button" class="btn btn-secondary" id="cancelDelete">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Continue</button>
+                <button type="submit" class="btn btn-danger">Continue</button>
             </div>
         </form>
     </div>
@@ -246,7 +155,7 @@
 
 <script>
     // Get the modal
-    const modal = document.getElementById("deleteModal");
+    const modal = document.getElementById("deleteAccountModal");
     
     // Get the button that opens the modal
     const btn = document.getElementById("deleteAccountBtn");
@@ -257,13 +166,6 @@
     // Get the cancel button
     const cancelBtn = document.getElementById("cancelDelete");
     
-    // Get the confirm button
-    const confirmBtn = document.getElementById("confirmDelete");
-    
-    // Get the password input and form
-    const passwordInput = document.getElementById("password");
-    const passwordForm = document.getElementById("passwordForm");
-    
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
         modal.style.display = "block";
@@ -272,36 +174,17 @@
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
-        passwordInput.value = ""; // Clear password field
     }
     
     // When the user clicks on cancel, close the modal
     cancelBtn.onclick = function() {
         modal.style.display = "none";
-        passwordInput.value = ""; // Clear password field
-    }
-    
-    // When the user clicks on confirm, verify password and proceed
-    confirmBtn.onclick = function() {
-        // Check if password is entered
-        if (passwordInput.value.trim() === "") {
-            alert("Please enter your password to continue.");
-            return;
-        }
-        
-        // Verify password (this is just a frontend check, the actual verification happens in the servlet)
-        const enteredPassword = passwordInput.value;
-        
-        // In a real application, you would verify the password on the server side
-        // Here we just submit the form to proceed to the delete account page
-        window.location.href = "${pageContext.request.contextPath}/DeleteAccountServlet";
     }
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
-            passwordInput.value = ""; // Clear password field
         }
     }
 </script>
