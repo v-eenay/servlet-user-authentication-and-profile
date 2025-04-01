@@ -14,9 +14,7 @@
     <title>Login | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        <%@ include file="/assets/css/style.css" %>
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 <body>
 
@@ -31,7 +29,7 @@
     </div>
     <% } %>
     
-    <!-- Display error message if present -->
+    <!-- Display error message if present -->                   
     <% if (request.getAttribute("error") != null) { %>
     <div class="alert alert-error">
         <%= request.getAttribute("error") %>

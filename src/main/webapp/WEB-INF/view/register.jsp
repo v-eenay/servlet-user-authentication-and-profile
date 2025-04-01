@@ -14,8 +14,67 @@
     <title>Register | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <style>
-        <%@ include file="/assets/css/style.css" %>
+        .image-preview {
+            display: none;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .file-upload {
+            margin-top: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            border: 2px dashed var(--border-color);
+            background-color: var(--background);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file-upload:hover {
+            border-color: var(--accent-color);
+        }
+        
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .file-upload-text {
+            color: var(--light-text);
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +150,12 @@
         <!-- Profile Picture Section -->
         <div class="form-section">
             <div class="form-section-title">Profile Picture</div>
+            
+            <!-- Image Preview -->
+            <div id="imagePreview" class="image-preview">
+                <img id="previewImg" src="#" alt="Profile Picture Preview">
+            </div>
+            
             <div class="form-group">
                 <label>Upload Profile Picture</label>
                 <div class="file-upload">
@@ -98,7 +163,7 @@
                         <div class="file-upload-icon">📷</div>
                         <div class="file-upload-text">Click to select a profile picture</div>
                         <div class="file-upload-text">(JPG, PNG, or GIF)</div>
-                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" onchange="previewImage(this)">
                     </label>
                 </div>
             </div>
@@ -109,6 +174,27 @@
     
     <p class="form-footer">Already have an account? <a href="${pageContext.request.contextPath}/LoginServlet">Login</a></p>
 </div>
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>
 
 </body>
 </html>

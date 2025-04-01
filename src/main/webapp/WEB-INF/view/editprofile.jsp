@@ -57,6 +57,22 @@
             border: 1px solid var(--border-color);
             padding: 3px;
         }
+        
+        .image-preview {
+            display: none;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -154,10 +170,15 @@
             </div>
             <% } %>
             
+            <!-- New Image Preview -->
+            <div id="imagePreview" class="image-preview">
+                <img id="previewImg" src="#" alt="New Profile Picture Preview">
+            </div>
+            
             <div class="form-group">
                 <label for="profilePicture">Upload New Profile Picture</label>
                 <div class="file-upload">
-                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*" onchange="previewImage(this)">
                     <p>Click to select a file or drag and drop</p>
                     <p class="form-help">Recommended size: 300x300 pixels. Max size: 5MB.</p>
                 </div>
@@ -180,6 +201,27 @@
         </div>
     </form>
 </div>
+
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>
 
 </body>
 </html>
