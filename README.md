@@ -15,7 +15,7 @@ Vinay Koirala
 
 This project is designed to help students learn:
 1. Jakarta Servlet API fundamentals
-2. JSP and JSTL for dynamic web pages
+2. JSP for dynamic web pages
 3. Session management and security
 4. Database integration with JDBC
 5. Object-Oriented Programming principles
@@ -128,9 +128,8 @@ user-profile-and-authentication/
    - Learn about request handling
    - Understand session management
 
-2. **JSP and JSTL**
+2. **JSP**
    - Analyze JSP pages
-   - Learn about JSTL tags
    - Study form handling
 
 ### Part 4: Security Features
@@ -207,7 +206,7 @@ user-profile-and-authentication/
 
 4. **Java Web**
    - Study Servlet API
-   - Learn JSP and JSTL
+   - Learn JSP
    - Understand session management
 
 ### Additional Resources
