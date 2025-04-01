@@ -77,7 +77,7 @@ public class ResetPasswordServlet extends HttpServlet {
             session.setAttribute("user", currentUser);
             
             // Set success message and redirect to profile page
-            request.getSession().setAttribute("message", "Password updated successfully!");
+            request.getSession().setAttribute("success", "Password updated successfully!");
             response.sendRedirect(request.getContextPath() + "/UserProfileServlet");
         } else {
             request.setAttribute("error", "Failed to update password. Please try again.");

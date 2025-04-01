@@ -23,9 +23,9 @@
     <p class="welcome-message">Please enter your credentials to login</p>
     
     <!-- Display success message if present -->
-    <% if (request.getAttribute("message") != null) { %>
+    <% if (request.getAttribute("success") != null) { %>
     <div class="alert alert-success">
-        <%= request.getAttribute("message") %>
+        <%= request.getAttribute("success") %>
     </div>
     <% } %>
     

@@ -119,7 +119,7 @@ public class UpdateProfileServlet extends HttpServlet {
             session.setAttribute("user", currentUser);
             
             // Set success message and redirect to profile page
-            request.getSession().setAttribute("message", "Profile updated successfully!");
+            request.getSession().setAttribute("success", "Profile updated successfully!");
             response.sendRedirect(request.getContextPath() + "/UserProfileServlet");
         } else {
             request.setAttribute("error", "Failed to update profile. Please try again.");

@@ -44,7 +44,7 @@
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/LoginServlet" class="subtle-link">&larr; Back to Home</a>
+            <a href="${pageContext.request.contextPath}/index.jsp" class="subtle-link">&larr; Back to Home</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>

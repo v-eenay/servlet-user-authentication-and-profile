@@ -18,7 +18,10 @@ public class UserProfileServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/LoginServlet");
             return;
         }
-        
+        String success = (String) session.getAttribute("success");
+        request.setAttribute("success", success);
+        String error = (String) session.getAttribute("error");
+        request.setAttribute("error", error);
         // Forward to user profile page
         request.getRequestDispatcher("/WEB-INF/view/userprofile.jsp").forward(request, response);
     }
