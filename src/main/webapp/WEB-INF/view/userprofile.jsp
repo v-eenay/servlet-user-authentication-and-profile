@@ -139,7 +139,7 @@
         <h2 class="modal-title">Verify Password</h2>
         <p>Please enter your password to proceed to account deletion.</p>
         
-        <form action="${pageContext.request.contextPath}/DeleteAccountServlet" method="post" class="form">
+        <form id="passwordForm" action="${pageContext.request.contextPath}/DeleteAccountServlet" method="get" class="form">
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>

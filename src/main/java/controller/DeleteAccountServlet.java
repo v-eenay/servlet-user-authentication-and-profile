@@ -21,7 +21,28 @@ public class DeleteAccountServlet extends HttpServlet {
             return;
         }
         
-        // Forward to delete account confirmation page
+        // Get current user from session
+        User currentUser = (User) session.getAttribute("user");
+        
+        // Get password from request
+        String password = request.getParameter("password");
+        
+        // Validate input
+        if (password == null || password.trim().isEmpty()) {
+            // If no password provided, just show the delete account page
+            request.getRequestDispatcher("/WEB-INF/view/deleteaccount.jsp").forward(request, response);
+            return;
+        }
+        
+        // Check if password is correct
+        if (!password.equals(currentUser.getPassword())) {
+            // Password is incorrect, set error message and redirect back to profile
+            request.setAttribute("error", "Incorrect password. Access to account deletion page denied.");
+            request.getRequestDispatcher("/WEB-INF/view/userprofile.jsp").forward(request, response);
+            return;
+        }
+        
+        // Password is correct, forward to delete account confirmation page
         request.getRequestDispatcher("/WEB-INF/view/deleteaccount.jsp").forward(request, response);
     }
 

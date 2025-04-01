@@ -20,32 +20,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Account | <%= user.getFullName() %></title>
+    <title>Delete Account | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 <body>
 
-<div class="container profile-container">
-    <div class="profile-header">
-        <div class="back-link">
-            <a href="${pageContext.request.contextPath}/UserProfileServlet" class="subtle-link">&larr; Back to Profile</a>
-        </div>
-        
-        <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
-        <div class="profile-image large">
-            <img src="data:image/jpeg;base64,<%= java.util.Base64.getEncoder().encodeToString(user.getProfilePicture()) %>" alt="Profile Picture" class="profile-pic">
-        </div>
-        <% } else { %>
-        <div class="avatar large">
-            <%= firstLetter %>
-        </div>
-        <% } %>
-        
-        <h1 class="profile-name">Delete Account</h1>
-        <p class="profile-username">@<%= user.getUsername() %></p>
+<div class="container">
+    <div class="back-link">
+        <a href="${pageContext.request.contextPath}/UserProfileServlet" class="subtle-link">&larr; Back to Profile</a>
     </div>
+    
+    <h1>Delete Your Account</h1>
     
     <!-- Display error message if present -->
     <% if (request.getAttribute("error") != null) { %>
@@ -73,22 +60,23 @@
             <div class="form-group">
                 <label for="reason">Please tell us why you're leaving (optional)</label>
                 <textarea id="reason" name="reason" rows="4"></textarea>
+                <p class="form-help">Your feedback helps us improve our service</p>
             </div>
         </div>
         
         <div class="form-section">
-            <div class="form-section-title">Confirm Deletion</div>
+            <div class="form-section-title">Final Confirmation</div>
             
             <div class="form-group">
-                <label for="password">Enter Your Password*</label>
+                <label for="password">Confirm your password*</label>
                 <input type="password" id="password" name="password" required>
-                <p class="form-help">Your password is required to confirm account deletion</p>
+                <p class="form-help">Enter your password to confirm account deletion</p>
             </div>
         </div>
         
         <div class="form-actions">
-            <button type="submit" class="btn btn-danger">Delete My Account</button>
             <a href="${pageContext.request.contextPath}/UserProfileServlet" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-danger">Delete My Account</button>
         </div>
     </form>
 </div>
