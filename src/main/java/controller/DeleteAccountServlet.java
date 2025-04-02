@@ -89,9 +89,10 @@ public class DeleteAccountServlet extends HttpServlet {
         if (deleteSuccess) {
             // Invalidate session (logout)
             session.invalidate();
-            
+            String message = "Account deletion successful.";
+            request.setAttribute("success", message);
             // Redirect to login page with success message
-            response.sendRedirect(request.getContextPath() + "/LoginServlet?message=Your account has been successfully deleted");
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Failed to delete account. Please try again.");
             request.getRequestDispatcher("/WEB-INF/view/deleteaccount.jsp").forward(request, response);

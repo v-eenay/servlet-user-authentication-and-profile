@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet {
         }
         
         // Add a message to be displayed on the login page
-        request.getSession().setAttribute("message", "You have been successfully logged out.");
+        request.getSession().setAttribute("success", "You have been successfully logged out.");
         
         // Redirect to login page
         response.sendRedirect(request.getContextPath() + "/LoginServlet");

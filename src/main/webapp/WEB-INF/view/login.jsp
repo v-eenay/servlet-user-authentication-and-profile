@@ -28,6 +28,12 @@
         <%= request.getAttribute("success") %>
     </div>
     <% } %>
+    <!-- Display success message if present -->
+    <% if (request.getAttribute("registrationSuccess") != null) { %>
+    <div class="alert alert-success">
+        <%= request.getAttribute("registrationSuccess") %>
+    </div>
+    <% } %>
     
     <!-- Display error message if present -->                   
     <% if (request.getAttribute("error") != null) { %>

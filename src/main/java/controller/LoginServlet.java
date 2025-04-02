@@ -11,20 +11,14 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Check if there's a registration success message
+        // Check if there's a success message
         String registrationSuccess = (String) request.getSession().getAttribute("registrationSuccess");
         if (registrationSuccess != null) {
-            request.setAttribute("message", registrationSuccess);
+            request.setAttribute("registrationSuccess", registrationSuccess);
             // Remove the session attribute to prevent showing the message again
             request.getSession().removeAttribute("registrationSuccess");
         }
-        
-        // Check if there's a message parameter (for account deletion success)
-        String message = request.getParameter("message");
-        if (message != null && !message.isEmpty()) {
-            request.setAttribute("message", message);
-        }
-        
+
         // Redirect to the login.jsp page in WEB-INF/view directory
         request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
     }
