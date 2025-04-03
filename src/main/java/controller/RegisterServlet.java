@@ -76,7 +76,7 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
             return;
         }
-        
+
         // Create user object
         User newUser = new User(
             username,
@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
         
         if (userId > 0) {
             // Registration successful, redirect to login page with success message
-            request.getSession().setAttribute("registerSuccess", "Registration successful! Please login.");
+            request.getSession().setAttribute("registrationSuccess", "Registration successful! Please login.");
             response.sendRedirect(request.getContextPath() + "/LoginServlet");
         } else {
             // Registration failed, redirect back to registration form with error

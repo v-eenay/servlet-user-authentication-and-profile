@@ -13,6 +13,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Check if there's a success message
         String registrationSuccess = (String) request.getSession().getAttribute("registrationSuccess");
+        System.out.println(registrationSuccess);
         if (registrationSuccess != null) {
             request.setAttribute("registrationSuccess", registrationSuccess);
             // Remove the session attribute to prevent showing the message again
