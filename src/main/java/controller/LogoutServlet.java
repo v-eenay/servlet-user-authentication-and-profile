@@ -8,6 +8,8 @@ import java.io.IOException;
 
 @WebServlet(name = "LogoutServlet", value = "/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
+    private static final String REMEMBER_ME_COOKIE_NAME = "rememberMe";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get the current session
@@ -20,6 +22,20 @@ public class LogoutServlet extends HttpServlet {
             
             // Invalidate the session
             session.invalidate();
+        }
+        
+        // Clear the remember me cookie
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (REMEMBER_ME_COOKIE_NAME.equals(cookie.getName())) {
+                    cookie.setValue("");
+                    cookie.setPath(request.getContextPath());
+                    cookie.setMaxAge(0); // This will delete the cookie
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
         }
         
         // Add a message to be displayed on the login page

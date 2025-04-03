@@ -9,11 +9,36 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
+    private static final String REMEMBER_ME_COOKIE_NAME = "rememberMe";
+    private static final int COOKIE_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Check if user is already logged in via remember me cookie
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (REMEMBER_ME_COOKIE_NAME.equals(cookie.getName())) {
+                    String[] credentials = decodeCookieValue(cookie.getValue());
+                    if (credentials != null && credentials.length == 2) {
+                        String username = credentials[0];
+                        String password = credentials[1];
+                        User user = UserDAO.getUserByEmailOrUsername(username, password);
+                        if (user != null) {
+                            // Auto login successful
+                            HttpSession session = request.getSession();
+                            session.setAttribute("user", user);
+                            session.setAttribute("loggedIn", true);
+                            response.sendRedirect(request.getContextPath() + "/");
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         // Check if there's a success message
         String registrationSuccess = (String) request.getSession().getAttribute("registrationSuccess");
-        System.out.println(registrationSuccess);
         if (registrationSuccess != null) {
             request.setAttribute("registrationSuccess", registrationSuccess);
             // Remove the session attribute to prevent showing the message again
@@ -29,6 +54,7 @@ public class LoginServlet extends HttpServlet {
         // Get form parameters
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String rememberMe = request.getParameter("rememberMe");
         
         // Validate input
         if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
@@ -47,12 +73,33 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("loggedIn", true);
             
-            // Redirect to homepage instead of user profile
+            // Handle remember me functionality
+            if (rememberMe != null && rememberMe.equals("on")) {
+                String cookieValue = encodeCookieValue(username, password);
+                Cookie rememberMeCookie = new Cookie(REMEMBER_ME_COOKIE_NAME, cookieValue);
+                rememberMeCookie.setMaxAge(COOKIE_MAX_AGE);
+                rememberMeCookie.setPath(request.getContextPath());
+                response.addCookie(rememberMeCookie);
+            }
+            
+            // Redirect to homepage
             response.sendRedirect(request.getContextPath() + "/");
         } else {
             // Authentication failed
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
+    }
+
+    // Helper method to encode username and password for cookie
+    private String encodeCookieValue(String username, String password) {
+        // Simple encoding - in production, use more secure methods
+        return username + ":"+password;
+    }
+
+    // Helper method to decode cookie value
+    private String[] decodeCookieValue(String cookieValue) {
+        // Simple decoding - in production, use more secure methods
+        return cookieValue.split(":");
     }
 }
