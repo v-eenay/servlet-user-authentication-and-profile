@@ -51,10 +51,11 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <div class="form-group checkbox-group">
-            <label class="checkbox-label">
+        <div class="form-group remember-me-group">
+            <label class="remember-me-label">
                 <input type="checkbox" id="rememberMe" name="rememberMe">
-                Remember me
+                <span class="checkmark"></span>
+                <span class="remember-text">Remember me</span>
             </label>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
