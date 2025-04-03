@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | User Profile System</title>
+    <title>Initialize User | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -20,8 +20,8 @@
 <body>
 
 <div class="container">
-    <h1>Create Account</h1>
-    <p class="welcome-message">Please fill in your details to register</p>
+    <h1>System Initialization</h1>
+    <p class="welcome-message">Configure your user parameters to establish system access</p>
     
     <!-- Display error message if present -->
     <% if (request.getAttribute("error") != null) { %>
@@ -33,7 +33,7 @@
     <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" class="form" enctype="multipart/form-data">
         <!-- Account Information Section -->
         <div class="form-section">
-            <div class="form-section-title">Account Information</div>
+            <div class="form-section-title">Access Configuration</div>
             <div class="form-group">
                 <label for="username">Username*</label>
                 <input type="text" id="username" name="username" required>
@@ -54,7 +54,7 @@
         
         <!-- Personal Information Section -->
         <div class="form-section">
-            <div class="form-section-title">Personal Information</div>
+            <div class="form-section-title">Core User Parameters</div>
             <div class="form-group">
                 <label for="fullName">Full Name*</label>
                 <input type="text" id="fullName" name="fullName" required>
@@ -76,7 +76,7 @@
         
         <!-- Contact Information Section -->
         <div class="form-section">
-            <div class="form-section-title">Contact Information</div>
+            <div class="form-section-title">Communication Endpoints</div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone">
@@ -89,7 +89,7 @@
         
         <!-- Profile Picture Section -->
         <div class="form-section">
-            <div class="form-section-title">Profile Picture</div>
+            <div class="form-section-title">Visual Identifier</div>
             
             <!-- Image Preview -->
             <div id="imagePreview" class="image-preview">
@@ -97,7 +97,7 @@
             </div>
             
             <div class="form-group">
-                <label>Upload Profile Picture</label>
+                <label>Upload Visual ID</label>
                 <div class="file-upload">
                     <label class="file-upload-label">
                         <div class="file-upload-icon">📷</div>

@@ -27,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile | <%= user.getFullName() %></title>
+    <title>Modify User Parameters | <%= user.getFullName() %></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -37,7 +37,7 @@
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/UserProfileServlet" class="subtle-link">&larr; Back to Profile</a>
+            <a href="${pageContext.request.contextPath}/UserProfileServlet" class="subtle-link">&larr; Return to System Data</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
@@ -50,7 +50,7 @@
         </div>
         <% } %>
         
-        <h1 class="profile-name">Edit Profile</h1>
+        <h1 class="profile-name">Configure User Parameters</h1>
         <p class="profile-username">@<%= user.getUsername() %></p>
     </div>
     
@@ -63,38 +63,38 @@
     
     <form action="${pageContext.request.contextPath}/UpdateProfileServlet" method="post" class="form" enctype="multipart/form-data">
         <div class="form-section">
-            <div class="form-section-title">Account Information</div>
+            <div class="form-section-title">System Access Parameters</div>
             
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">System ID</label>
                 <input type="text" id="username" name="username" value="<%= user.getUsername() %>" disabled>
-                <p class="form-help">Username cannot be changed</p>
+                <p class="form-help">System ID is immutable</p>
             </div>
             
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Primary Contact</label>
                 <input type="email" id="email" name="email" value="<%= user.getEmail() %>" disabled>
-                <p class="form-help">Email cannot be changed</p>
+                <p class="form-help">Primary contact is immutable</p>
             </div>
         </div>
         
         <div class="form-section">
-            <div class="form-section-title">Personal Information</div>
+            <div class="form-section-title">Core Identity Data</div>
             
             <div class="form-group">
-                <label for="fullName">Full Name*</label>
+                <label for="fullName">Identity String*</label>
                 <input type="text" id="fullName" name="fullName" value="<%= user.getFullName() != null ? user.getFullName() : "" %>" required>
             </div>
             
             <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
+                <label for="dateOfBirth">Creation Date</label>
                 <input type="date" id="dateOfBirth" name="dateOfBirth" value="<%= dobString %>">
             </div>
             
             <div class="form-group">
-                <label for="gender">Gender</label>
+                <label for="gender">Entity Type</label>
                 <select id="gender" name="gender">
-                    <option value="" <%= user.getGender() == null || user.getGender().isEmpty() ? "selected" : "" %>>Select Gender</option>
+                    <option value="" <%= user.getGender() == null || user.getGender().isEmpty() ? "selected" : "" %>>Select Entity Type</option>
                     <option value="Male" <%= "Male".equals(user.getGender()) ? "selected" : "" %>>Male</option>
                     <option value="Female" <%= "Female".equals(user.getGender()) ? "selected" : "" %>>Female</option>
                     <option value="Other" <%= "Other".equals(user.getGender()) ? "selected" : "" %>>Other</option>
@@ -104,21 +104,21 @@
         </div>
         
         <div class="form-section">
-            <div class="form-section-title">Contact Information</div>
+            <div class="form-section-title">Communication Endpoints</div>
             
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+                <label for="phone">Secondary Contact</label>
                 <input type="tel" id="phone" name="phone" value="<%= user.getPhone() != null ? user.getPhone() : "" %>">
             </div>
             
             <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address">Location Data</label>
                 <input type="text" id="address" name="address" value="<%= user.getAddress() != null ? user.getAddress() : "" %>">
             </div>
         </div>
         
         <div class="form-section">
-            <div class="form-section-title">Profile Picture</div>
+            <div class="form-section-title">Visual Identifier</div>
             
             <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
             <div class="current-image">

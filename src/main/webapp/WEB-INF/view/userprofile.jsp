@@ -34,7 +34,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile | <%= user.getFullName() %></title>
+    <title>System User Data | <%= user.getFullName() %></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -44,7 +44,7 @@
 <div class="container profile-container">
     <div class="profile-header">
         <div class="back-link">
-            <a href="${pageContext.request.contextPath}/index.jsp" class="subtle-link">&larr; Back to Home</a>
+            <a href="${pageContext.request.contextPath}/index.jsp" class="subtle-link">&larr; Return to Dashboard</a>
         </div>
         
         <% if (user.getProfilePicture() != null && user.getProfilePicture().length > 0) { %>
@@ -77,55 +77,55 @@
     
     <div class="profile-sections">
         <div class="profile-section">
-            <h2 class="section-title">Account Information</h2>
+            <h2 class="section-title">System Access Parameters</h2>
             
             <div class="profile-detail">
-                <div class="detail-label">Username</div>
+                <div class="detail-label">System ID</div>
                 <div class="detail-value"><%= user.getUsername() %></div>
             </div>
             
             <div class="profile-detail">
-                <div class="detail-label">Email</div>
+                <div class="detail-label">Primary Contact</div>
                 <div class="detail-value"><%= user.getEmail() %></div>
             </div>
         </div>
         
         <div class="profile-section">
-            <h2 class="section-title">Personal Information</h2>
+            <h2 class="section-title">Core Identity Data</h2>
             
             <div class="profile-detail">
-                <div class="detail-label">Full Name</div>
+                <div class="detail-label">Identity String</div>
                 <div class="detail-value"><%= user.getFullName() != null ? user.getFullName() : "Not provided" %></div>
             </div>
             
             <div class="profile-detail">
-                <div class="detail-label">Date of Birth</div>
+                <div class="detail-label">Creation Date</div>
                 <div class="detail-value"><%= !dobString.isEmpty() ? dobString : "Not provided" %></div>
             </div>
             
             <div class="profile-detail">
-                <div class="detail-label">Gender</div>
+                <div class="detail-label">Entity Type</div>
                 <div class="detail-value"><%= user.getGender() != null && !user.getGender().isEmpty() ? user.getGender() : "Not provided" %></div>
             </div>
         </div>
         
         <div class="profile-section">
-            <h2 class="section-title">Contact Information</h2>
+            <h2 class="section-title">Communication Endpoints</h2>
             
             <div class="profile-detail">
-                <div class="detail-label">Phone Number</div>
+                <div class="detail-label">Secondary Contact</div>
                 <div class="detail-value"><%= user.getPhone() != null && !user.getPhone().isEmpty() ? user.getPhone() : "Not provided" %></div>
             </div>
             
             <div class="profile-detail">
-                <div class="detail-label">Address</div>
+                <div class="detail-label">Location Data</div>
                 <div class="detail-value"><%= user.getAddress() != null && !user.getAddress().isEmpty() ? user.getAddress() : "Not provided" %></div>
             </div>
         </div>
     </div>
     
     <div class="profile-actions">
-        <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Edit Profile</a>
+        <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Modify Parameters</a>
         <a href="${pageContext.request.contextPath}/ResetPasswordServlet" class="btn btn-secondary">Change Password</a>
         <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline">Logout</a>
         <button id="deleteAccountBtn" class="btn btn-danger">Delete Account</button>

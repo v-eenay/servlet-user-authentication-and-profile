@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome | User Profile System</title>
+    <title>Dashboard | User Profile System</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -42,13 +42,13 @@
     </div>
     <% } %>
     
-    <h1>Welcome, <%= user.getFullName() %></h1>
-    <p class="welcome-message">It's a pleasure to have you with us today. Your distinguished presence enhances our community. We invite you to explore your personalized dashboard and manage your esteemed profile.</p>
+    <h1>Dashboard | <%= user.getFullName() %></h1>
+    <p class="welcome-message">Access granted to secure environment. Navigate through your personalized interface to manage system configurations and user parameters.</p>
     
     <div class="dashboard-actions">
-        <a href="${pageContext.request.contextPath}/UserProfileServlet" class="btn btn-primary">View Profile</a>
-        <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Update Profile</a>
-        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-danger">Logout</a>
+        <a href="${pageContext.request.contextPath}/UserProfileServlet" class="btn btn-primary">System Profile</a>
+        <a href="${pageContext.request.contextPath}/UpdateProfileServlet" class="btn btn-primary">Configure Settings</a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-danger">Terminate Session</a>
     </div>
 </div>
 

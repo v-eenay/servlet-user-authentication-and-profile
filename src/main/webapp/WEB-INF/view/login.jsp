@@ -19,8 +19,8 @@
 <body>
 
 <div class="container">
-    <h1>Welcome Back</h1>
-    <p class="welcome-message">Please enter your credentials to login</p>
+    <h1>System Access</h1>
+    <p class="welcome-message">Authenticate with your credentials to access the secure environment</p>
     
     <!-- Display success message if present -->
     <% if (request.getAttribute("success") != null) { %>
