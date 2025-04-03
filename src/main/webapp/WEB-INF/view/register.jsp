@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/validation.css">
 </head>
 <body>
 
@@ -135,5 +136,6 @@
     }
 </script>
 
+<script src="${pageContext.request.contextPath}/assets/js/validation.js"></script>
 </body>
 </html>
